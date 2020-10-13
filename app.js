@@ -55,7 +55,7 @@ app.get("/campgrounds", function(req, res){
        if(err){
            console.log(err);
        } else {
-          res.render("campgrounds",{campgrounds:allCampgrounds});
+          res.render("index",{campgrounds:allCampgrounds});
        }
     });
 });
@@ -78,9 +78,23 @@ app.post("/campgrounds", function(req, res){
     });
 });
 
+//NEW - show form to create new campground
 app.get("/campgrounds/new", function(req, res){
    res.render("new.ejs"); 
 });
+
+// SHOW - shows more info about one campground
+app.get("/campgrounds/:id", function(req, res){
+    //find the campground with provided ID
+    Campground.findById(req.params.id, function(err, foundCampground){
+        if(err){
+            console.log(err);
+        } else {
+            //render show template with that campground
+            res.render("show", {campground: foundCampground});
+        }
+    });
+})
 
 app.listen(3000, function(){
     console.log("The YelpCamp Server Has Started!");
