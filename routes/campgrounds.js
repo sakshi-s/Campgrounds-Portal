@@ -3,7 +3,7 @@ var router  = express.Router();
 var Campground = require("../models/campground");
 
 //INDEX - show all campgrounds
-router.get("/", function(req, res){
+router.get("/", isLoggedIn, function(req, res){
     // Get all campgrounds from DB
     Campground.find({}, function(err, allCampgrounds){
        if(err){
@@ -15,7 +15,7 @@ router.get("/", function(req, res){
 });
 
 //CREATE - add new campground to DB
-router.post("/", function(req, res){
+router.post("/", isLoggedIn, function(req, res){
     // get data from form and add to campgrounds array
     var name = req.body.name;
     var image = req.body.image;
@@ -50,5 +50,13 @@ router.get("/:id", function(req, res){
         }
     });
 });
+
+//middleware
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+}
 
 module.exports = router;
