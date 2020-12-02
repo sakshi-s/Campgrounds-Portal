@@ -67,6 +67,8 @@ router.put("/:id", function(req, res){
     });
 });
 
+
+
 // COMMENT DESTROY ROUTE
 router.delete("/:comment_id", function(req, res){
     //findByIdAndRemove
