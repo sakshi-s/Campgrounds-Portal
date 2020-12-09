@@ -229,6 +229,7 @@
       "resolved": "https://registry.npmjs.org/has-flag/-/has-flag-3.0.0.tgz",
       "version": "3.0.0"
     },
+    "heroku": "^7.47.4",
     "http-errors": {
       "integrity": "sha512-uUQBt3H/cSIVfch6i1EuPNy/YsRSOUBXTVfZ+yR7Zjez3qjBz6i9+i4zjNaoqcoFVI4lQJ5plg63TvGfRSDCRg==",
       "requires": {
