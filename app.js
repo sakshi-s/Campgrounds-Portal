@@ -22,7 +22,20 @@ mongoose.connect("mongodb+srv://sakshi:sharma@cluster0.yea6u.mongodb.net/<dbname
     useCreateIndex: true,
     useUnifiedTopology: true,
     useFindAndModify: false
-});
+}),
+      () => {
+        try {
+          //something
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+    const connection = mongoose.connection;
+
+    connection.once('open', () => {
+      console.log('Connection to DB was succesful');
+    });
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -30,18 +43,6 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
 //seedDB(); // seed the database
-
-var session = require('express-session')
-var MemoryStore = require('memorystore')(session)
- 
-app.use(session({
-    cookie: { maxAge: 86400000 },
-    store: new MemoryStore({
-      checkPeriod: 86400000 // prune expired entries every 24h
-    }),
-    resave: false,
-    secret: 'keyboard cat'
-}))
 
 
 
