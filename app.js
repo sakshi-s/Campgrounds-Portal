@@ -34,11 +34,12 @@ app.use(flash());
 
 
 // PASSPORT CONFIGURATION
-app.use(require("express-session")({
-    secret: "Once again Rusty wins cutest dog!",
-    resave: false,
-    saveUninitialized: false
-}));
+// app.use(require("express-session")({
+//     secret: "Once again Rusty wins cutest dog!",
+//     resave: false,
+//     saveUninitialized: false
+// }));
+var session = require('cookie-session');
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
