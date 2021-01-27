@@ -10,6 +10,7 @@
     "error": "^10.4.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "memorystore": "^1.6.4",
     "method-override": "^3.0.0",
     "mongoose": "^5.11.13",
     "passport": "^0.4.1",
