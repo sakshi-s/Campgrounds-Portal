@@ -10,32 +10,37 @@ var express     = require("express"),
     Comment = require("./models/comment"),
     User        = require("./models/user"),
     seedDB      = require("./seeds")
+    
+require('dotenv').config()
 
 //requring routes
 var commentRoutes    = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
     indexRoutes      = require("./routes/index")
 
-mongoose.connect("mongodb+srv://sakshi:sharma@cluster0.yea6u.mongodb.net/<dbname>?retryWrites=true&w=majority",
+const dbURL = process.env.DB_URL
+
+mongoose.connect(dbURL,
 {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
     useFindAndModify: false
 }),
-      () => {
+
+    () => {
         try {
           //something
         } catch (error) {
           console.error(error);
         }
-      };
+    };
 
-    const connection = mongoose.connection;
+const connection = mongoose.connection;
 
-    connection.once('open', () => {
-      console.log('Connection to DB was succesful');
-    });
+connection.once('open', () => {
+    console.log('Connection to DB was succesful');
+});
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -43,7 +48,6 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
 //seedDB(); // seed the database
-
 
 
 // PASSPORT CONFIGURATION
